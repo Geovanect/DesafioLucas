@@ -22,21 +22,20 @@ public class Pilha {
         if(indicepilha<pilha.length && palavra != null){
             indicepilha++;
             this.pilha[indicepilha] = palavra;
-            System.out.println("Valor empilhado: " + palavra);
         }
         else {
             System.out.println("Pilha cheia");
         }
     }
 
-    public void desempilhar(){
+    public Character desempilhar(){
         if(!isEmpty()){
             char removido = this.pilha[indicepilha];
             indicepilha--;
-            System.out.print(removido);
+            return removido;
         }
         else {
-            System.out.println("Pilha Vazia");
+            return null;
         }
     }
 

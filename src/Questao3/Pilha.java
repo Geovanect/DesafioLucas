@@ -3,7 +3,7 @@ package Questao3;
 public class Pilha {
     private NoPilha topo;
 
-    private void empilhar(int v){
+    public void empilhar(int v){
         NoPilha novo = new NoPilha(v);
         novo.proximo = topo;
         topo = novo;

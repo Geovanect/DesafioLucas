@@ -1,18 +1,13 @@
 package Questao7;
-
 public class Lista {
     Elemento primeiro, ultimo, atual;
 
-
     public Lista(){
-        primeiro = ultimo = atual =null;
+        primeiro = ultimo = atual = null;
     }
 
     public boolean estaVazio(){
-        if(primeiro ==  null){
-            return true;
-        }
-        return false;
+        return primeiro == null;
     }
 
     public int comprimento(){
@@ -27,7 +22,7 @@ public class Lista {
 
     public void moveParaPosicao(int pos){
         atual = primeiro;
-        for(int i =0; i<pos ; i++){
+        for(int i = 0; i < pos && atual != null; i++){
             atual = atual.proximo;
         }
     }
@@ -35,36 +30,60 @@ public class Lista {
     public void inserirPrimeiro(int v){
         Elemento novo = new Elemento(v);
         if(estaVazio()){
-            primeiro = novo;
-            ultimo = novo;
-        }
+            primeiro = ultimo = novo;
+        } else {
             novo.proximo = primeiro;
             primeiro = novo;
+        }
     }
 
     public void inserirUltimo(int v){
         Elemento novo = new Elemento(v);
         if(estaVazio()){
-            primeiro = novo;
+            primeiro = ultimo = novo;
+        } else {
+            ultimo.proximo = novo;
             ultimo = novo;
         }
-        ultimo.proximo = novo;
-        ultimo = novo;
     }
 
     public void removerPrimeiro(){
         if(estaVazio()){
             System.out.println("Lista vazia");
+        } else {
+            primeiro = primeiro.proximo;
+            if(primeiro == null) {
+                ultimo = null;
+            }
         }
-        primeiro = primeiro.proximo;
-
     }
 
     public void removerUltimo(){
-        int pos = comprimento() -1;
-        moveParaPosicao(pos);
-        atual.proximo = null;
-        atual = ultimo;
+        if(estaVazio()){
+            System.out.println("Lista vazia");
+            return;
+        }
 
+        if(primeiro == ultimo){ // só um elemento
+            primeiro = ultimo = null;
+            return;
+        }
+
+        Elemento anterior = primeiro;
+        while(anterior.proximo != ultimo){
+            anterior = anterior.proximo;
+        }
+        anterior.proximo = null;
+        ultimo = anterior;
+    }
+
+    public void exibir(){
+        Elemento atual = primeiro;
+        System.out.print("Lista: ");
+        while(atual != null){
+            System.out.print(atual.valor + " ");
+            atual = atual.proximo;
+        }
+        System.out.println();
     }
 }

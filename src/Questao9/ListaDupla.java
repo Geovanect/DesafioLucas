@@ -35,48 +35,73 @@ public class ListaDupla {
         throw new RuntimeException("Erro ao buscar posicao solicitada");
     }
 
-    public Elemento Locate(ListaDupla l1, int pos){
-        if(l1.tamanho() < pos){
+    public Elemento Locate(int pos) {
+        if (pos < 0 || pos >= tamanho()) {
             return null;
         }
-        l1.moveParaPosicao(pos);
-        return l1.atual;
+
+        Elemento atual = primeiro;
+        for (int i = 0; i < pos; i++) {
+            atual = atual.proximo;
+        }
+        return atual;
     }
 
-    public void insereP(ListaDupla l1, int valor, int pos){
-        if(l1.tamanho()<pos){
-            throw new RuntimeException("Valor da posicao indicada maior que o numero de elementos");
+    public void InsereP(int valor, int pos) {
+        if (pos < 0 || pos > tamanho()) {
+            throw new RuntimeException("Erro: posição inválida");
         }
+
         Elemento novo = new Elemento(valor);
-        if(pos == 0){
-            novo.proximo = l1.primeiro;
-            if(l1.primeiro != null){
-                l1.primeiro.anterior = novo;
+
+        if (pos == 0) {
+            novo.proximo = primeiro;
+            if (primeiro != null) {
+                primeiro.anterior = novo;
+            } else {
+                ultimo = novo;
             }
             primeiro = novo;
-        }
-        l1.Locate(l1, pos);
-        novo.proximo = atual;
-        novo.anterior = atual.anterior;
-
-        if(atual.anterior!= null){
-            atual.anterior.proximo = novo;
+            return;
         }
 
+        Elemento atual = Locate(pos);
+        if (atual == null) {
+            // Inserção no final
+            novo.anterior = ultimo;
+            if (ultimo != null) {
+                ultimo.proximo = novo;
+            }
+            ultimo = novo;
+        } else {
+            novo.anterior = atual.anterior;
+            novo.proximo = atual;
+            if (atual.anterior != null) {
+                atual.anterior.proximo = novo;
+            }
+            atual.anterior = novo;
+            if (pos == 0) {
+                primeiro = novo;
+            }
+        }
     }
 
-    public Elemento RemovaP(ListaDupla l1, int pos) {
-        if (l1.tamanho() <= pos) {
-            throw new RuntimeException("Valor da posicao indicada maior que o numero de elementos");
+    public Elemento RemovaP(int pos) {
+        Elemento removido = Locate(pos);
+        if (removido == null) {
+            throw new RuntimeException("Erro: posição inválida");
         }
-        Elemento removido = l1.Locate(l1,pos);
-        if(removido.anterior != null){
+
+        if (removido.anterior != null) {
             removido.anterior.proximo = removido.proximo;
-        }else {
-            l1.primeiro = removido.proximo;
+        } else {
+            primeiro = removido.proximo;
         }
-        if(removido.proximo != null){
+
+        if (removido.proximo != null) {
             removido.proximo.anterior = removido.anterior;
+        } else {
+            ultimo = removido.anterior;
         }
 
         return removido;

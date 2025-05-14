@@ -9,6 +9,8 @@ public class Main {
 
             Pilha pilha = new Pilha();
 
+
+
             for(int i =0; i<texto.length();i++){
                 char c = texto.charAt(i);
 
@@ -17,10 +19,14 @@ public class Main {
                 }
                 else{
                     while(!pilha.isEmpty()){
-                        pilha.desempilhar();
+                        System.out.print(pilha.desempilhar());
                     }
                     System.out.print(c);
                 }
+            }
+
+            while(!pilha.isEmpty()){
+                pilha.desempilhar();
             }
 
         }

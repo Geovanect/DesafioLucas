@@ -33,9 +33,26 @@ public class Lista {
         if(estaVazio()){
             System.out.println("Não há elementos para remover");
         }
-        else{
+
+            else if(primeiro == ultimo){
+                primeiro = null;
+                ultimo = null;
+            }else {
             ultimo = ultimo.anterior;
+            ultimo.proximo = null;
         }
+    }
+
+    public void imprimeLista(Lista lista){
+        if(estaVazio()){
+            System.out.println("Não há elementos na lista");
+        }
+        Elemento atual = lista.primeiro;
+        while(atual!= null){
+            System.out.println(atual.valor + " ");
+            atual = atual.proximo;
+        }
+        System.out.println();
     }
 
 }

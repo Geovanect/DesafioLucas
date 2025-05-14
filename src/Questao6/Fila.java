@@ -39,13 +39,13 @@ public class Fila {
     }
 
     public int remover(){
-        if(estaVazio()){
+        if (estaVazio()) {
             throw new RuntimeException("Está vazia");
-        }
-        else{
+        } else {
+            int valor = inicio.valor;
             inicio = inicio.proximo;
+            return valor;
         }
-        return inicio.valor;
     }
 
     public void testaFila(Fila fila1, Fila fila2){
@@ -94,26 +94,26 @@ public class Fila {
     }
 
     public int retornaPares(){
-        Elemento atual;
-        atual = inicio;
-        while(atual != null){
-            if(atual.valor % 2 == 0){
-                return atual.valor;
+        int count = 0;
+        Elemento atual = inicio;
+        while (atual != null) {
+            if (atual.valor % 2 == 0) {
+                count++;
             }
             atual = atual.proximo;
         }
-        return 0;
+        return count;
     }
     public int retornaImpares(){
-        Elemento atual;
-        atual = inicio;
-        while(atual != null){
-            if(atual.valor % 2 == 1){
-                return atual.valor;
+        int count = 0;
+        Elemento atual = inicio;
+        while (atual != null) {
+            if (atual.valor % 2 != 0) {
+                count++;
             }
             atual = atual.proximo;
         }
-        return 0;
+        return count;
     }
 
 }

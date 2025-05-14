@@ -46,13 +46,11 @@ public class Pilha {
 
     public int mediaAritimetica(Pilha pilha){
         int soma = 0;
-        for(int i =0; i<pilha.topo -1; i++){
+        for(int i =0; i<=pilha.topo ; i++){
             soma += pilha.pilha[i];
         }
-        if(pilha.topo>= 0){
-            return soma / (pilha.topo +1);
-        }
-        return 0;
+
+        return soma / (topo +1);
     }
 
     public void maiorEMenor(){
@@ -61,20 +59,20 @@ public class Pilha {
         }
 
         int maior = pilha[0];
+        int menor = pilha[0];
 
-        for(int i = 0; i<=topo; i++){
-            if(pilha[i]>maior){
+        for(int i = 0; i <= topo; i++){
+            if(pilha[i] > maior){
                 maior = pilha[i];
             }
-        }
-        System.out.println("Maior numero: "+ maior);
-
-        int menor = pilha[0];
-        for(int i = 0; i<=topo; i++){
-            if(pilha[i]<menor){
+            if(pilha[i] < menor){
                 menor = pilha[i];
             }
         }
+
+
+
+        System.out.println("Maior numero: "+ maior);
         System.out.println("Menor numero: " +menor);
     }
 
@@ -91,20 +89,22 @@ public class Pilha {
     }
 
     public int retornaImpares(Pilha pilha){
-        for(int i =0; i<pilha.topo -1; i++){
-            if(pilha.pilha[i] % 2 == 1){
-                return pilha.pilha[i];
+        int cont = 0;
+        for(int i =0; i<=pilha.topo ; i++){
+            if(pilha.pilha[i] % 2 != 0){
+                cont++;
             }
         }
-        return 0;
+        return cont;
     }
     public int retornaPares(Pilha pilha){
-        for(int i =0; i<pilha.topo -1; i++){
+        int cont= 0;
+        for(int i =0; i<=pilha.topo; i++){
             if(pilha.pilha[i] % 2 == 0){
-                return pilha.pilha[i];
+                cont++;
             }
         }
-        return 0;
+        return cont;
     }
 
 }
